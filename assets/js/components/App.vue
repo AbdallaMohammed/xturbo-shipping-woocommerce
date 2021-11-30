@@ -277,7 +277,7 @@ export default {
 .woocommerce-layout__header {
     z-index: 999 !important;
 }
-.v--modal {
+.vm--modal {
     text-align: right;
     left: 0px !important;
     margin: 0 auto;
