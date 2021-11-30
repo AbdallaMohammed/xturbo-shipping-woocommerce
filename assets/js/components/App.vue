@@ -130,7 +130,7 @@
                         </div>
                         <div class="xturbo-modal-form-row">
                             <div class="xturbo-modal-field-label">
-                                <label>{{ xturbo('Notes', 'xturbo') }}</label>
+                                <label>{{ locale('Notes', 'xturbo') }}</label>
                             </div>
                             <div class="xturbo-modal-field">
                                 <textarea v-model="form.note"></textarea>
