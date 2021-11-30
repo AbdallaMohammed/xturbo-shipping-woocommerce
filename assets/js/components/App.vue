@@ -226,7 +226,7 @@ export default {
                 }
             })
 
-            if (typeof response.data.data === 'object') {
+            if (typeof response.data.data === 'object' && response.data.data.tracking_id !== '') {
                 this.shipment = response.data.data
             } else {
                 const { data } = await this.axios.get(this.xturbo_i18n.admin_ajax, {
