@@ -151,9 +151,9 @@ class XTurbo_Ajax {
 
         if (! $body->success) {
             if ($body->message == 'Duplicate') {
-                $order->update_status('xturbo');
-            } else {
                 $order->update_status('xturbo-failed');
+            } else {
+                $order->update_status('xturbo');
             }
 
             if ($body->error) {
