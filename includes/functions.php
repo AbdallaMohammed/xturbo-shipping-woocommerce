@@ -158,3 +158,23 @@ if (! function_exists('xturbo_get_order_statuses')) {
         return $statuses;
     }
 }
+
+if (! function_exists('xturbo_get_order_products')) {
+    /**
+     * Get order products.
+     * 
+     * @param WC_Order $order
+     * @return array
+     */
+    function xturbo_get_order_products($order) {
+        $products_array = [];
+
+        foreach ($order->get_items() as $key => $item) {
+            $product = $item->get_product();
+
+            $products_array[] = $item->get_name();
+        }
+
+        return $products_array;
+    }
+}

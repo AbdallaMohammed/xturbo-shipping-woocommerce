@@ -23,7 +23,6 @@ class XTurbo_Ajax {
         check_admin_referer('xturbo_nonce', 'nonce');
 
         $order_id = absint($_REQUEST['order_id']);
-
         $order = wc_get_order($order_id);
 
         if (! $order) {
@@ -36,7 +35,6 @@ class XTurbo_Ajax {
         $total_width = 0;
         $total_height = 0;
 
-        $products_array = [];
         foreach ($order->get_items() as $key => $item) {
             $product = $item->get_product();
 
@@ -59,18 +57,6 @@ class XTurbo_Ajax {
             if (is_numeric($product->get_height())) {
                 $total_height += (int) $product->get_height();
             }
-
-            $products_array[] = [
-                'id' => $item->get_id(),
-                'quantity' => $item->get_quantity(),
-                'name' => $item->get_name(),
-                'total' => $item->get_total(),
-                'sku' => $product->get_sku(),
-                'weight' => $product->get_width(),
-                'height' => $product->get_height(),
-                'length' => $product->get_length(),
-                'width' => $product->get_width(),
-            ];
         }
 
         $receiver_name = $order->get_shipping_first_name();
@@ -117,7 +103,6 @@ class XTurbo_Ajax {
             'deliverCity' => $deliver_city,
             'cod' => $order->get_total(),
             'note' => 'WordPress',
-            'comment' => json_encode($products_array, JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE),
         ]);
     }
 
@@ -148,6 +133,7 @@ class XTurbo_Ajax {
                 'nonce'
             ])
         );
+        $post_data['comment'] = implode(', ', xturbo_get_order_products($order));
 
         $response = wp_remote_post('https://portal.xturbox.com/api/v1/client/createOrder', [
             'headers' => [
