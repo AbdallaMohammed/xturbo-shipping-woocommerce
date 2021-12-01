@@ -28,6 +28,14 @@
                         </div>
                         <div class="xturbo-modal-form-row">
                             <div class="xturbo-modal-field-label">
+                                <label>{{ locale('COD', 'xturbo') }}</label>
+                            </div>
+                            <div class="xturbo-modal-field">
+                                <input type="number" v-model="form.cod">
+                            </div>
+                        </div>
+                        <div class="xturbo-modal-form-row">
+                            <div class="xturbo-modal-field-label">
                                 <label>{{ locale('Receiver Name', 'xturbo') }}</label>
                             </div>
                             <div class="xturbo-modal-field">
